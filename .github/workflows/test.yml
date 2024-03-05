@@ -71,6 +71,7 @@ jobs:
     - name: Run Docker container
       run: |
         docker run -d --name my-node-app -p 7050:7050 ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        sleep 5
 
     # - name: Check if container is running
     #   id: check_container
