@@ -32,7 +32,7 @@ jobs:
           
       - name: Build Docker image
         run: | 
-          docker build -t harshp0207/adv-backend-metrics-application:latest .
+          docker build -t ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
 
       # - name: Run container for health check
       #   run: docker run --rm ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} curl -f http://localhost:7050/health-check  # Replace PORT with your actual health check port
@@ -41,7 +41,7 @@ jobs:
       #   run: docker push ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       - name: Run container for testing purpose
         run: |
-          docker run -d --name ws1 -p 7050:7050 harshp0207/adv-backend-metrics-application:latest
+          docker run -d --name ws1 -p 7050:7050 ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           sleep 10
           
       - name: display container logs
@@ -64,4 +64,4 @@ jobs:
           password: ${{ env.DOCKER_PASSWORD }}
           
       - name: Push Docker image to registry
-        run: docker push harshp0207/adv-backend-metrics-application:latest
+        run: docker push ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
