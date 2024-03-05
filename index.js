@@ -73,7 +73,7 @@ app.get("/health-check", (req, res) => {
     }
 
     try {
-        res.send(health_check);
+        res.status(200).send(health_check);
     } catch (error) {
         health_check.message = error;
         res.status(503).send();
