@@ -61,17 +61,16 @@ jobs:
     # - name: Execute Script
     #   run: sh script.sh  # Replace with the name of your script file
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+    # - name: Set up Node.js
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
 
-    - name: Install Dependencies
-      run: npm install
+    # - name: Install Dependencies
+    #   run: npm install
 
     - name: Build Docker Image
       run: docker build -t ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
-
 
     - name: Run Docker container
       run: |
