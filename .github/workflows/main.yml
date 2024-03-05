@@ -30,18 +30,6 @@ jobs:
         if: ${{ github.event.inputs.run-workflow == 'false' }}
         run: exit 1  # Exit the entire workflow with a non-zero code
           
-      - uses: actions/checkout@v3
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
-          
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '20'
-          
       - name: Build Docker image
         run: | 
           docker build -t harshp0207/adv-backend-metrics-application:latest .
@@ -54,6 +42,7 @@ jobs:
       - name: Run container for testing purpose
         run: |
           docker run -d --name ws1 -p 7050:7050 harshp0207/adv-backend-metrics-application:latest
+          sleep 10
           
       - name: display container logs
         run: docker logs ws1
@@ -66,6 +55,13 @@ jobs:
             exit 1
           fi
           echo "Health check passed with status $response"
+          
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
           
       - name: Push Docker image to registry
         run: docker push harshp0207/adv-backend-metrics-application:latest
