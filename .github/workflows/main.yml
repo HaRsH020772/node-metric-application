@@ -54,7 +54,9 @@ jobs:
       - name: Run container for testing purpose
         run: |
           docker run -d --name ws1 -p 7050:7050 harshp0207/adv-backend-metrics-application:latest
-          docker logs ws1
+          
+      - name: display container logs
+        run: docker logs ws1
         
       - name: Run container for health check 
         run: |
