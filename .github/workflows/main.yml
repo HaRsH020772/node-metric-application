@@ -70,10 +70,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: trivy-scan-results
-          path: trivy-report  # Adjust path if using a different format
+          path: ./trivy-report  # Adjust path if using a different format
 
       - name: Analyze results (optional)
-        run: cat trivy-report
+        run: cat ./trivy-report
           
       - name: Push Docker image to registry
         run: docker push ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
