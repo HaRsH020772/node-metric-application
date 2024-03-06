@@ -57,7 +57,7 @@ jobs:
           password: ${{ env.DOCKER_PASSWORD }}
           
       - name: Use Trivy action (official Aqua Security action)
-        uses: aquasecurity/trivy-action@v1.7.0  # Adjust version as needed
+        uses: aquasecurity/trivy-action@master  # Adjust version as needed
         with:
           image: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}  # Replace with your image details
           format: 'table'
