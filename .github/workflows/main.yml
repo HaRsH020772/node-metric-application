@@ -65,13 +65,13 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          output: /trivy-report  # Adjust path if needed
+          output: /trivy-report.txt  # Adjust path if needed
 
       - name: Upload scan results (optional)
         uses: actions/upload-artifact@v3
         with:
           name: trivy-scan-results
-          path: ./trivy-report  # Adjust path if using a different format
+          path: ./trivy-report.txt  # Adjust path if using a different format
 
       - name: Analyze results (optional)
         run: cat ./trivy-report
