@@ -65,6 +65,7 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          output: /trivy-report  # Adjust path if needed
 
       - name: Upload scan results (optional)
         uses: actions/upload-artifact@v3
