@@ -74,7 +74,7 @@ jobs:
           path: ./trivy-report.txt  # Adjust path if using a different format
 
       - name: Analyze results (optional)
-        run: cat ./trivy-report
+        run: cat ./trivy-report.txt
           
       - name: Push Docker image to registry
         run: docker push ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
