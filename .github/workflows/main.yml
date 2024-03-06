@@ -56,5 +56,21 @@ jobs:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
           
+      - name: Use Trivy action (official Aqua Security action)
+        uses: aquasecurity/trivy-action@v1.7.0  # Adjust version as needed
+        with:
+          image: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}  # Replace with your image details
+          format: 'table'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload scan results (optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: trivy-scan-results
+          path: trivy-report  # Adjust path if using a different format
+
+      - name: Analyze results (optional)
+        run: cat trivy-report
+          
       - name: Push Docker image to registry
         run: docker push ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
