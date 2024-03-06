@@ -59,8 +59,11 @@ jobs:
       - name: Use Trivy action (official Aqua Security action)
         uses: aquasecurity/trivy-action@master  # Adjust version as needed
         with:
-          image: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}  # Replace with your image details
+          image-ref: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
       - name: Upload scan results (optional)
